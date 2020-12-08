@@ -1,0 +1,16 @@
+type Transfer1 @entity {
+  id: ID!
+  value: BigInt!
+  from: Bytes!
+  to: Bytes!
+  timestamp: BigInt
+}
+
+type Approval1 @entity {
+  "Transaction hash concatenated with event log index"
+  id: ID!
+  value: BigInt!
+  owner: Bytes!
+  spender: Bytes!
+  timestamp: BigInt
+}

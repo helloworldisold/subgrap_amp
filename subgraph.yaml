@@ -1,0 +1,68 @@
+specVersion: 0.0.2
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum/contract
+    name: Amp
+    network: mainnet
+    source:
+      address: "0xff20817765cb7f73d4bde2e66e067e58d11095c2"
+      abi: Amp
+      startBlock: 10635417
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - Approval
+        - Approval1
+        - ApprovalByPartition
+        - AuthorizedOperator
+        - AuthorizedOperatorByPartition
+        - ChangedPartition
+        - CollateralManagerRegistered
+        - Minted
+        - OwnerUpdate
+        - OwnershipTransferAuthorization
+        - PartitionStrategySet
+        - RevokedOperator
+        - RevokedOperatorByPartition
+        - Swap
+        - Transfer
+        - Transfer1
+        - TransferByPartition
+      abis:
+        - name: Amp
+          file: ./abis/Amp.json
+      eventHandlers:
+        - event: Approval(indexed address,indexed address,uint256)
+          handler: handleApproval
+        - event: ApprovalByPartition(indexed bytes32,indexed address,indexed address,uint256)
+          handler: handleApprovalByPartition
+        - event: AuthorizedOperator(indexed address,indexed address)
+          handler: handleAuthorizedOperator
+        - event: AuthorizedOperatorByPartition(indexed bytes32,indexed address,indexed address)
+          handler: handleAuthorizedOperatorByPartition
+        - event: ChangedPartition(indexed bytes32,indexed bytes32,uint256)
+          handler: handleChangedPartition
+        - event: CollateralManagerRegistered(address)
+          handler: handleCollateralManagerRegistered
+        - event: Minted(indexed address,indexed address,uint256,bytes)
+          handler: handleMinted
+        - event: OwnerUpdate(indexed address,indexed address)
+          handler: handleOwnerUpdate
+        - event: OwnershipTransferAuthorization(indexed address)
+          handler: handleOwnershipTransferAuthorization
+        - event: PartitionStrategySet(bytes4,string,indexed address)
+          handler: handlePartitionStrategySet
+        - event: RevokedOperator(indexed address,indexed address)
+          handler: handleRevokedOperator
+        - event: RevokedOperatorByPartition(indexed bytes32,indexed address,indexed address)
+          handler: handleRevokedOperatorByPartition
+        - event: Swap(indexed address,indexed address,uint256)
+          handler: handleSwap
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+        - event: TransferByPartition(indexed bytes32,address,indexed address,indexed address,uint256,bytes,bytes)
+          handler: handleTransferByPartition
+      file: ./src/mapping.ts
